@@ -13,7 +13,9 @@ secretNumber = Math.trunc(Math.random()*20) + 1;
 console.log(secretNumber)
 
 
-
+function DisplayMessage(poruka){
+    message.textContent= poruka;
+}
 
 document.querySelector(".check").addEventListener("click",function(){
     const guess =  Number(document.querySelector(".guess").value);
@@ -21,7 +23,8 @@ document.querySelector(".check").addEventListener("click",function(){
     message.textContent = "";
     if(guess === secretNumber){
        num.textContent = "";
-        message.textContent = "🎉 Correct Answer  🎉";
+        // message.textContent = "🎉 Correct Answer  🎉";
+        DisplayMessage("🎉 Correct Answer  🎉");
         body.style = "background-color: #60b347; ";
         num.textContent = secretNumber;
 
@@ -35,16 +38,16 @@ document.querySelector(".check").addEventListener("click",function(){
    else if(guess !== secretNumber){
     if(scoreShow>1){
     if(guess<secretNumber){
-        message.textContent = "To Low";
+        DisplayMessage("To Low");
     }
     else {
-        message.textContent = "To High";
+        DisplayMessage("To High");
     }
     scoreShow--;
     score.textContent = scoreShow;
    }
    else{
-    message.textContent = "You Lost the Game";
+    DisplayMessage("You lost the game");
     document.querySelector(".check").disabled = true;
    }
 }
@@ -58,7 +61,7 @@ again.addEventListener("click",function(){
     secretNumber = Math.trunc(Math.random()*20) + 1;
     console.log(secretNumber);
 
-    message.textContent = "Start guessing...";
+    DisplayMessage("Start Guessing");
     body.style = "background-color: #222; ";
     score.textContent = scoreShow;
     num.textContent = "?";
