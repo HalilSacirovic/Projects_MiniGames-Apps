@@ -12,15 +12,34 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-let score = 0;
 
-let scoreArr = [0,0];
-let active = true;
-let isPlaying = 0;
+let score,scoreArr,isPlaying,active;
 
+const NewGame = () => {
+    player0El.classList.remove("player--winner");
+player1El.classList.remove("player--winner");
+player1El.classList.remove("player--active");
+player1El.classList.remove("player--active");
+player0El.classList.add("player--active");
+ score = 0;
+
+ scoreArr = [0,0];
+ active = true;
+ isPlaying = 0;
 
 score0El.textContent = 0;
 score1El.textContent = 0;
+
+current0El.textContent = 0;
+current1El.textContent = 0;
+
+
+
+
+}
+
+NewGame();
+
 
  const swithPlayer = () =>{
     player0El.classList.toggle("player--active"); // ovo togle znaci da ukoliko player0El sadrzi klasu active uklonice je; a ukoliko ne sandrzi tu klasu onda je dodaje
@@ -75,3 +94,11 @@ if(scoreArr[isPlaying] >=10) {
 
 
 })
+
+
+btnNew.addEventListener("click",function(){
+    
+NewGame();
+
+})
+
