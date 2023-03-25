@@ -22,10 +22,25 @@ let isPlaying = 0;
 score0El.textContent = 0;
 score1El.textContent = 0;
 
+ const swithPlayer = () =>{
+    player0El.classList.toggle("player--active"); // ovo togle znaci da ukoliko player0El sadrzi klasu active uklonice je; a ukoliko ne sandrzi tu klasu onda je dodaje
+    player1El.classList.toggle("player--active");
+    document.getElementById(`current--${isPlaying}`).textContent = 0;
+    score = 0;
+    if(isPlaying === 0){
+        isPlaying = 1;
+    }
+    else {
+        isPlaying = 0;
+    }
+
+ }
+
 
 btnRoll.addEventListener("click",function(){
     
-    let dice  = Math.trunc(Math.random()*6)+1;
+    if(active){
+        let dice  = Math.trunc(Math.random()*6)+1;
   
         diceEl.src= `dice-${dice}.png`;
 
@@ -35,36 +50,28 @@ btnRoll.addEventListener("click",function(){
     
         }else{
             
-            player0El.classList.toggle("player--active"); // ovo togle znaci da ukoliko player0El sadrzi klasu active uklonice je; a ukoliko ne sandrzi tu klasu onda je dodaje
-            player1El.classList.toggle("player--active");
-            document.getElementById(`current--${isPlaying}`).textContent = 0;
-            score = 0;
-            if(isPlaying === 0){
-                isPlaying = 1;
-            }
-            else {
-                isPlaying = 0;
-            }
-
+            swithPlayer();
         }
+    }
     
 })
 
 
 btnHold.addEventListener("click",function(){
-
+if(active){
+    
 scoreArr[isPlaying] += score;
 document.getElementById(`score--${isPlaying}`).textContent = scoreArr[isPlaying];
 
-player0El.classList.toggle("player--active"); // ovo togle znaci da ukoliko player0El sadrzi klasu active uklonice je; a ukoliko ne sandrzi tu klasu onda je dodaje
-player1El.classList.toggle("player--active")
-document.getElementById(`current--${isPlaying}`).textContent = 0;
-score = 0;
-if(isPlaying === 0){
-    isPlaying = 1;
+if(scoreArr[isPlaying] >=10) {
+    active=false
+    document.querySelector(`.player--${isPlaying}`).classList.add("player--winner"); // ovo togle znaci da ukoliko player0El sadrzi klasu active uklonice je; a ukoliko ne sandrzi tu klasu onda je dodaje
+    document.querySelector(`.player--${isPlaying}`).classList.remove("player--active");
+}else{
+
+    swithPlayer()
 }
-else if(isPlaying === 1){
-    isPlaying = 0;
 }
+
 
 })
